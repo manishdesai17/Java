@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #submit {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #submit:hover {
+            background-color: #4cae4c;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm" action="pro3Servlet" method="post" onsubmit="return validate()">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" required>
+            <div id="firstNameError" class="error"></div>
+
+           <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required>
+            <div id="lastNameError" class="error"></div>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <div id="passwordError" class="error"></div>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <div id="confirmPasswordError" class="error"></div>
+
+           <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+            <div id="emailError" class="error"></div>
+
+            <label for="mobile">Mobile Number</label>
+            <input type="number" id="mobile" name="mobile" required>
+            <div id="mobileError" class="error"></div>
+
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3" cols="50" required></textarea>
+            <div id="addressError" class="error"></div>
+
+            <label for="role">Select User Role</label>
+            <select id="role" name="role" required>
+                <option value="">-- Select Role --</option>
+                <option value="admin">Admin</option>
+                <option value="registered_user">Registered User</option>
+                <option value="guest">Guest</option>
+            </select>
+            <div id="roleError" class="error"></div>
+
+            <input type="submit" value="Register" id="submit"/>
+        </form>
+    </div>
+    <script>
+        function validate()
+        {
+        
+        var firstName=document.getElementById("firstName");
+        var error = document.getElementsByClassName("error");
+        var lastName=document.getElementById("lastName");
+        var password=document.getElementById("password");
+        var confirmPassword=document.getElementById("confirmPassword");
+        var email=document.getElementById("email");
+        var mobile=document.getElementById("mobile");
+     
+        
+        
+        var alphabets = /^[a-zA-z]+$/;
+        var email_pattern = /[^\s\\\W_]@[^\s\\\W_].[^\s\\\W_]/;
+        var return_value = true;
+        console.log(firstName.value.length)
+        if(!alphabets.test(firstName.value) || firstName.value.length<6)
+        {
+            
+          error[0].textContent="First name is contain only alphabets and more than or equal to 6 character";
+          return_value = false;
+        }
+        else
+            error[0].textContent="";
+       
+        if(!alphabets.test(lastName.value) || firstName.value.length<6)
+        {
+          error[1].textContent="Last name is contain only alphabets and more than or equal to 6 character";
+          return_value = false;  
+        }
+        else
+            error[1].textContent="";
+        
+       if(password.value.length<6)
+        {
+          error[2].textContent="password is contain more than or equal to 6 character";
+          return_value = false;
+        }
+        else 
+            error[2].textContent="";
+        
+       if(password.value!=confirmPassword.value)
+        {
+            error[3].textContent="password and confirmPassword password not match";
+            return_value = false;
+        }
+        else 
+            error[3].textContent="";
+        
+       if(!email_pattern.test(email.value))
+       {
+            error[4].textContent="email must be enter in correct formate";
+            return_value = false;
+       }
+       else
+            error[4].textContent="";
+        
+       if(mobile.value.length!=10) 
+       {
+           error[5].textContent="mobile number must be enter 10 digit";
+           return_value=false;
+       }
+       else
+           error[5].textContent="";
+       
+       return return_value;        
+     }
+    </script>
+</body>
+</html>

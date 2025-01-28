@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #submit {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        select {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        #submit:hover {
+            background-color: #4cae4c;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login Form</h2>
+        <form id="loginForm" action="Pro4Servlet" method="post" onsubmit="return validateLogin()">
+             <div id="passwordError" class="error" style="margin-bottom: 15px;font-size: 16px"></div>
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+            <div id="emailError" class="error"></div>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+           
+            <label for="role">Select User Role</label>
+            <select id="role" name="role" required>
+                <option value="">-- Select Role --</option>
+                <option value="admin">Admin</option>
+                <option value="registered_user">Registered User</option>
+                <option value="guest">Guest</option>
+            </select>
+            <input type="submit" value="Login" id="submit"/>
+        </form>
+    </div>
+    <script>
+        function validateLogin() {
+            var email = document.getElementById("email");
+           
+            var error = document.getElementsByClassName("error");
+            console.log(error[0]);
+           var email_pattern = /[^\s\\\W_]@[^\s\\\W_].[^\s\\\W_]/;
+            var return_value = true;
+
+            if (!email_pattern.test(email.value)) {
+                error[1].textContent = "Email must be in the correct format.";
+                return_value = false;
+            } else {
+                error[1].textContent = "";
+            }
+
+
+            return return_value;
+        }
+    </script>
+</body>
+</html>

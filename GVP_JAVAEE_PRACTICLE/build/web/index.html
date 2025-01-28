@@ -1,0 +1,135 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body
+            {
+                background-color: #f9f9f9;
+                /*height: 100vh;*/
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                font-size: 20px;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            #container
+            {
+               border: 1px solid #ddd;
+               width:450px;
+               padding: 30px 20px;
+               background-color:#fff;
+               border-radius: 2px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            input{
+                height: 28px;
+                width: 98%;
+                font-size:18px;
+            }
+            select
+            {
+                height: 40px;
+            }
+            .submit
+            {
+                height: 35px;
+                background-color: green;
+                color:whitesmoke;
+                font-size: 20px;
+                border-radius: 5px;
+                margin:5px 0px;
+                border:none;
+            }
+            .result
+            {
+                border: 1px solid #ddd;
+                 padding: 30px 20px;
+               background-color:#fff;
+               border-radius: 2px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </head>
+    <body>
+         <div id="container">
+             <form action="pro1Servlet" method="post" onsubmit="return validate()">
+                    <h2>Compound Interest <br>Calculator</h2>
+                <table cellspacing="5px" width="100%">
+
+                    <tr>
+                        <td>Principal Amount(Rs)</td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" name="principal" min="1" required/></td>
+                    </tr>
+                    <tr>
+                        <td>Interest rate (%) : </td>
+
+                    </tr>
+                    <tr><td><input type="number" name="interest" step="any" min="0.1" required/></td></tr>
+                    <tr>
+                        <td>Years : </td>
+                        <td>Months : </td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" name="year" min="0" id ="year" /></td>
+                        <td><input type="number" name="months" max="11" min="0" id="month"/></td>
+                    </tr>
+                    <tr style="position:relative;top:-10px;">
+                        <td><span id="error-msg" style="font-size:10px;color:red"></span></td>
+                    </tr>
+                    <tr style="position:relative;top:-10px;">
+                        <td>Compound interval</td>
+                    </tr>
+                    <tr style="position:relative;top:-10px;"><td>
+                        <select name="interval">
+                            <option value="365">Daily (365/yr)</option>
+                             <option value="360">Daily (360/yr)</option>
+                            <option value="52">Weekly (52/yr)</option>
+                            <option value="26">Bi-Weekly (26/yr)</option>
+                            <option value="24">Half-Monthly (24/yr)</option>
+                            <option value="12">Monthly (12/yr)</option>
+                            <option value="6">Bi-Monthly (6/yr)</option>
+                            <option value="4">Quarterly (4/yr)</option>
+                            <option value="2">Half-Yearly (2/yr)</option>
+                            <option value="1">Yearly (1/yr)</option>
+                        </select>
+                    </td>
+                    </tr>
+
+                </table>
+                <input type="submit" value="calculate" class="submit"/>
+            </form>
+         </div>
+        <script>
+          function validate()
+          {
+             var year =document.getElementById("year").value;
+             var month = document.getElementById("month").value;
+             
+             var error = document.getElementById("error-msg");
+             if(year.length==0 && month.length==0)
+             {
+                 error.textContent="enter value of year or month";
+               return false;
+             }
+             if(year.length==0)
+             {
+                 document.getElementById("year").value=0;
+             }
+             if(month.length==0)
+             {
+                 document.getElementById("month").value=0;    
+             }
+             if(year.length>4)
+             {   
+               error.textContent="year digit must be equal to or less 4";
+               return false;
+             }
+          }
+        </script>
+    </body>
+    </html>
